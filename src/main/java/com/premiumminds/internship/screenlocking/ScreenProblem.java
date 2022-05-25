@@ -25,6 +25,7 @@ public class ScreenProblem extends Problem {
     }
     
     private void actionListBuilder() {
+        /** Builds an array with the possible actions for each state in the problem */
         for (int i = 0; i < 9; i++) {
             if (i+1 == 1 || i+1 == 3 || i+1 == 7 || i+1 == 9) {
                 actionList[i] = Arrays.asList(corner);
@@ -42,6 +43,9 @@ public class ScreenProblem extends Problem {
     }
 
     public void clear(Integer state) {
+        /** Removes a state from the array of possible actions, 
+         * since a given state can only be visited once
+         */
         for (int i = 0; i < 9; i++) {
             if (actionList[i].contains(state))
                 actionList[i].remove(actionList[i].indexOf(state));
@@ -52,10 +56,12 @@ public class ScreenProblem extends Problem {
 
     @Override
     public ArrayList<Integer> actions(int state) {
+        /** Returns the actions possible from a certain state */
         return actionList[state-1];
     }
 
     public int result(int state, Integer action) throws InvalidParameterException {
+        /** Returns the result of performing an action on a given state */
         if (actions(state).contains(action)) {
             return action;
         }

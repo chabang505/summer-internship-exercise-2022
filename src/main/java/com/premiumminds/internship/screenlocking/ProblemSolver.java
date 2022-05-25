@@ -21,6 +21,9 @@ public class ProblemSolver {
     }
 
     public int depthLimitedSearch() {
+        /** Performs a DLS on the problem, returning
+         * the amount of unexplored branches at the limit depth
+         */
         Stack<Node> nodeStack = new Stack<>();
         int count;
         nodeStack.add(problem.getInitial());
