@@ -1,57 +1,48 @@
 package com.premiumminds.internship.screenlocking;
 
-import java.security.InvalidParameterException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-
-import com.premiumminds.internship.screenlocking.Problem;
+import java.util.Map;
 
 public class Node {
-    
-    private Integer state = null;
-    private Node parent = null;
-    private Integer action = null;
-    private int depth = 0;
 
-    public Node() {
+    int value;
+    List<Integer> connected = new ArrayList<>();
 
-    }
+    static int[] corner = {2, 4, 5, 6, 8};
+    static int[] side28 = {1, 3, 4, 5, 6, 7, 9};
+    static int[] side46 = {1, 2, 3, 5, 7, 8, 9};
+    static int[] middle = {1, 2, 3, 4, 6, 7, 8, 9};
 
-    public Node(Integer state) {
-        this.state = state;
-    }
+    public Node(int value) {
+        this.value = value;
+        if (value == 1 || value == 3 || value == 7 || value == 9) {
+            for (int num : corner) {
+                this.connected.add(num);
+            }
+        }
+        else if (value == 2 || value == 8) {
+            for (int num : side28) {
+                this.connected.add(num);
+            }
+        }
 
-    public Node(Integer state, Node parent, Integer action) {
-        this.state = state;
-        this.parent = parent;
-        this.action = action;
-        if (parent != null) {
-            this.depth = parent.depth + 1;
+        else if (value == 4 || value == 6) {
+            for (int num : side46) {
+                this.connected.add(num);
+            }
+        }
+
+        else {
+            for (int num : middle) {
+                this.connected.add(num);
+            }
         }
     }
 
-    public Integer getState() {
-        return this.state;
-    }
-
-    public ArrayList<Node> expand(ScreenProblem problem) {
-        /** List the nodes reachable in one step from this node */
-        List<Node> nodes = new ArrayList<>();
-        for (int action: problem.actions(this.state)) {
-            nodes.add(this.childNode(problem, action));
-        }
-        problem.clear(this.state);
-        return nodes;
-    }
-
-    public Node childNode(ScreenProblem problem, int action) {
-        /** Returns the child node resulting from performing a given action */
-        try {
-            Integer nextState = problem.result(this.state, action);
-        } catch (InvalidParameterException e) {
-            System.out.println(e.getMessage());
-        };
-        Node nextNode = new Node(nextState, this, action);
-        return nextNode;
+    public void clearValue(int value) {
+        /* Removes a node from the list of connected nodes */
+        this.connected.remove(connected.indexOf(Integer.valueOf(value)));
     }
 }
