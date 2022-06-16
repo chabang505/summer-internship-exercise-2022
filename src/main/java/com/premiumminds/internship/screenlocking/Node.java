@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Node {
 
-    int value;
-    List<Integer> connected = new ArrayList<>();
+    private int value;
+    private List<Integer> connected = new ArrayList<>();
 
     static int[] corner = {2, 4, 5, 6, 8};
     static int[] side28 = {1, 3, 4, 5, 6, 7, 9};
@@ -39,6 +39,14 @@ public class Node {
                 this.connected.add(num);
             }
         }
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public List<Integer> getConnected() {
+        return connected;
     }
 
     public void clearValue(int value) {

@@ -10,9 +10,9 @@ import com.premiumminds.internship.screenlocking.Node;
 public class Grid {
     
         
-    ArrayList<Node> nodes = new ArrayList<>();
-    ArrayList<Map<Integer, Integer>> inFront = new ArrayList<Map<Integer, Integer>>();
-    ArrayList<Integer> usedNodes = new ArrayList<>();
+    private ArrayList<Node> nodes = new ArrayList<>();
+    private ArrayList<Map<Integer, Integer>> inFront = new ArrayList<Map<Integer, Integer>>();
+    private ArrayList<Integer> usedNodes = new ArrayList<>();
 
     public Grid() {
         populateNodes();
@@ -61,13 +61,22 @@ public class Grid {
         inFront.add(map9);
     }
 
+    public Node getNode(int value) {
+        for (int i = 0; i < nodes.size(); i++) {
+            if (nodes.get(i).getValue() == value) {
+                return nodes.get(i);
+            }
+        }
+        return null;
+    }
+
     public void clearNode(Integer value) {
         /* Removes a node from the grid by removing it's respctive arraylist of connected nodes
          * and removing it from the lists of connected on all other nodes
          */
         usedNodes.add(value);
         for (int i = 0; i < nodes.size(); i++) {
-            if (nodes.get(i).value == value) {
+            if (nodes.get(i).getValue() == value) {
                 nodes.remove(nodes.indexOf(nodes.get(i)));
                 nodes.get(i).clearValue(value);
             }
@@ -79,7 +88,7 @@ public class Grid {
         for (int i = 0; i < inFront.size(); i++) {
             /* Checks if node(value) is blocking others and if it hasn't been used yet */
             if (inFront.get(i).containsKey(value) && !usedNodes.contains(value)) {
-                nodes.get(i).connected.add(inFront.get(i).get(value));
+                nodes.get(i).getConnected().add(inFront.get(i).get(value));
             }
         }
     }
@@ -88,6 +97,4 @@ public class Grid {
         clearNode(value);
         seeNodes(value);
     }
-
-
 }
