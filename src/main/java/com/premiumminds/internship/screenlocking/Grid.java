@@ -76,10 +76,11 @@ public class Grid {
          */
         usedNodes.add(value);
         for (int i = 0; i < nodes.size(); i++) {
+            nodes.get(i).clearValue(value);
             if (nodes.get(i).getValue() == value) {
                 nodes.remove(nodes.indexOf(nodes.get(i)));
-                nodes.get(i).clearValue(value);
             }
+            
         }   
     }
 

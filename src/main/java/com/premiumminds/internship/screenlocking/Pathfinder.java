@@ -23,7 +23,8 @@ public class Pathfinder {
         if (length == 1) return 1;
         int cases = 0;
         for (int i = 0; i < firstNode.getConnected().size(); i++) {
-            cases += solveAux(grid.getNode(firstNode.getConnected(i)), length - 1, grid.updateGrid(firstNode.getValue()));
+            grid.updateGrid(firstNode.getValue());
+            cases += solveAux(grid.getNode(firstNode.getConnected().get(i)), length - 1, grid);
         }
         return cases;
     } 

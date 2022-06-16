@@ -51,6 +51,8 @@ public class Node {
 
     public void clearValue(int value) {
         /* Removes a node from the list of connected nodes */
-        this.connected.remove(connected.indexOf(Integer.valueOf(value)));
+        if (connected.contains(Integer.valueOf(value))) {
+            connected.remove(connected.indexOf(Integer.valueOf(value)));
+        }
     }
 }
