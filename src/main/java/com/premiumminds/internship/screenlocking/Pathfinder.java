@@ -27,5 +27,6 @@ public class Pathfinder {
             cases += solveAux(grid.getNode(firstNode.getConnected().get(i)), length - 1, grid);
         }
         return cases;
-    } 
+    }
+
 }

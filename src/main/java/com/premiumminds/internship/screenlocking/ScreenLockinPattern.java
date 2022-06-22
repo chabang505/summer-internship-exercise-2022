@@ -1,7 +1,5 @@
 package com.premiumminds.internship.screenlocking;
 
-import java.util.concurrent.Future;
-
 import com.premiumminds.internship.screenlocking.Pathfinder;
 
 /**
@@ -19,19 +17,14 @@ class ScreenLockinPattern implements IScreenLockinPattern {
     Pathfinder solver = new Pathfinder(firstPoint, length);
     return solver.solve();
   }
-
+ 
   public static void main(String[] args) {
 
     ScreenLockinPattern counter = new ScreenLockinPattern();
+    // The program receives the first point and the length from the command line, printing out the result
     int firstPoint = Integer.valueOf(args[0]);
     int length = Integer.valueOf(args[1]);
     int result = counter.countPatternsFrom(firstPoint, length);
-
-    /* for (int i = 1; i <= 9; i++) {
-      result = counter.countPatternsFrom(i, 2);
-      System.out.println(result);
-    } */
-    System.out.println(result);
-    
+        System.out.println(result);
   }
 }
